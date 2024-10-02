@@ -11,13 +11,18 @@ public class BigNumArithmetic {
         Scanner fileReader = new Scanner(file);
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
+            noExSpaces(line);
             System.out.println(line);
         }
 
         } catch (FileNotFoundException e) {
             System.out.println("Invalid File");
-
-            //testing this out
         }
+    }
+    //this is removing all of the extra spaces from one line of input
+    public static String noExSpaces(String line) { // this needs to not be static but unsure how 
+        line = line.replaceAll("( )+", " ");
+        return line;
+
     }
 }
