@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class BigNumArithmetic {
     public static void main(String[] args) throws Exception {
-        //String fileName = args[0];
+        String fileName = args[0];
 
         try{
-        File file = new File ("read.txt");
+        File file = new File (fileName);
         Scanner fileReader = new Scanner(file);
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
@@ -20,8 +20,9 @@ public class BigNumArithmetic {
                 part[i] = zeros(part[i]);
                 i++;
             }
-
-            System.out.println(line);
+            
+            for (String s: part){
+            System.out.println(s);}
         }
 
         } catch (FileNotFoundException e) {
