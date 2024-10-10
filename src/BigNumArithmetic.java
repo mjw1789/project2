@@ -1,10 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class BigNumArithmetic {
+    String [] equation;
+    LStack stack = new LStack();
+    public void main(String[] args) throws Exception {
 
-    public static void main(String[] args) throws Exception {
         String fileName = args[0];
 
         try{
@@ -13,35 +14,36 @@ public class BigNumArithmetic {
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
             line = noExSpaces(line);
-            String[] part = splitUp(line);
-
-            int i = 0;
-
-            while (i < part.length) {
-                part[i] = zeros(part[i]);
-                i++;
+            String[] equation = splitUp(line);
+                for (int i=0; i<equation.length; i++) {
+                    if (equation[0].equals("+")) { this.add(equation); }
+                    else if (!equation[0].equals("+") || !equation[0].equals("*")) {
+                        String string = equation[0];
+                        stack.push(string);
+                    }
+                }
             }
-
-            System.out.println(line);
-        }
-
         } catch (FileNotFoundException e) {
             System.out.println("Invalid File");
         }
     }
-    //this is removing all of the extra spaces from one line of input
-    public static String noExSpaces(String line) { // this needs to not be static but unsure how 
+
+
+
+//this is removing all of the extra spaces from one line of input
+    public String noExSpaces(String line) {
         line = line.replaceAll("( )+", " ");
         return line;
     }
-    //split one line at the spaces that are left
-    public static String[] splitUp(String line) { //also should not be static
+
+//split one line at the spaces that are left
+    public String[] splitUp(String line) {
         String[] part = line.split(" ");
         return part;
     }
 
-    //get rid of all leading zeros
-    public static String zeros(String part) { // once again should not be static
+//get rid of all leading zeros
+    public String zeros(String part) {
         int x = 0;
         String p = "";
         
@@ -58,5 +60,15 @@ public class BigNumArithmetic {
             x++;
         }
         return p;
+    }
+
+//addition method
+    public void add(String[] equation) {
+        Object temp1 = stack.pop();
+        Object temp2 = stack.pop();
+        int num1 = Integer.parseInt(temp1.toString());
+        int num2 = Integer.parseInt(temp2.toString());
+        int result = num1 + num2;
+        stack.push(result);
     }
 }
