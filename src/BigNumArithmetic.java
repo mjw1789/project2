@@ -66,9 +66,7 @@ public class BigNumArithmetic {
     public void add(String[] equation) {
         Object temp1 = stack.pop();
         Object temp2 = stack.pop();
-        int num1 = Integer.parseInt(temp1.toString());
-        int num2 = Integer.parseInt(temp2.toString());
-        int result = num1 + num2;
-        stack.push(result);
+        //Linked list here
+        //stack.push(result);
     }
 }

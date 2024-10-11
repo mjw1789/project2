@@ -11,6 +11,9 @@ class LList implements List {
   LList(int size) { this(); }     // Constructor -- Ignore size
   LList() { clear(); }
 
+  //getter for listSize
+  public int getListSize() {return listSize;}
+
   // Remove all elements
   public void clear() {
     curr = tail = new Link(null); // Create trailer
@@ -33,6 +36,13 @@ class LList implements List {
     tail.setElement(it);
     tail = tail.next();
     listSize++;
+    return true;
+  }
+
+  //Add "it" to front
+  public boolean addFront(Object it){
+    Link link = new Link(it, head);
+    head = link;
     return true;
   }
 
