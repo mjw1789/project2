@@ -66,7 +66,16 @@ public class BigNumArithmetic {
     public void add(String[] equation) {
         Object temp1 = stack.pop();
         Object temp2 = stack.pop();
-        //Linked list here
-        //stack.push(result);
+        String temp11 = temp1.toString();
+        String temp22 = temp2.toString();
+
+        BigInteger value1 = new BigInteger();
+        BigInteger value2 = new BigInteger();
+
+        value1.bigInteger(temp11);
+        value2.bigInteger(temp22);
+
+        int val1Length = value1.bigIntegerLength();
+
     }
 }

@@ -102,7 +102,7 @@ class LList implements List {
     if (curr == tail) // No current element
       throw new NoSuchElementException("getvalue() in LList has current of " + curr + " and size of "
         + listSize + " that is not a a valid element");
-    return curr.element(); 
+    return curr.element();
   }
 
   // Check if the list is empty
