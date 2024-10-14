@@ -1,4 +1,5 @@
 public class BigInteger {
+    LList bigInteger;
     private int size;
   
   public void bigInteger(String input) {
@@ -8,9 +9,15 @@ public class BigInteger {
     for (int i=0; i<length; i++) {
       //list.addFront(input.charAt(i));
       list.insert(input.charAt(i));
-
-
     }
+  }
+
+  public void setBigInteger(LList bigInteger){
+    this.bigInteger = bigInteger;
+  }
+
+  public LList getBigInteger() {
+    return bigInteger;
   }
 
   public int bigIntegerSize() {
