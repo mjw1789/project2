@@ -10,6 +10,7 @@ public class BigInteger {
       //list.addFront(input.charAt(i));
       list.insert(input.charAt(i));
     }
+    this.setBigInteger(list);
   }
 
   public void setBigInteger(LList bigInteger){
