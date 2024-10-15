@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-   00000123    314134 +
-1243   00000134   +
-      124 234 +
-0000003423       34   +
-    
-=======
-000000000123 +
+000000000123        123 +
 00000 iowebfoewbfbipew
 000000oweibfoewbfobewf
 owebfoewbfoewbf
 ewibfoew owefnoewibf
 owebfoebwf
->>>>>>> b5f033d37c4ca3f7d727bc2949907602afacd133
