@@ -105,6 +105,10 @@ class LList implements List {
     return curr.element();
   }
 
+  public void setValue(int i) {
+    curr.setElement(i);
+  }
+
   // Check if the list is empty
   public boolean isEmpty() { return listSize == 0; }
 }
