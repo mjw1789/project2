@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.classfile.instruction.ThrowInstruction;
 import java.util.*;
 
 public class BigNumArithmetic {
@@ -68,6 +69,7 @@ public class BigNumArithmetic {
         Object temp2 = stack.pop();
         String temp11 = temp1.toString();
         String temp22 = temp2.toString();
+        int over = 0;
 
         BigInteger value1 = new BigInteger();
         BigInteger value2 = new BigInteger();
@@ -75,7 +77,80 @@ public class BigNumArithmetic {
         value1.bigInteger(temp11);
         value2.bigInteger(temp22);
 
-        int val1Length = value1.bigIntegerLength();
+        int val1Length = value1.bigIntegerSize();
+        int val2Length = value2.bigIntegerSize();
+
+
+        if (val1Length == val2Length) {
+
+            LList val1temp = value1.getBigInteger();
+            val1temp.moveToEnd();
+    
+            LList val2temp = value2.getBigInteger();
+            val2temp.moveToEnd();
+
+            for (int i = val1Length -1; i >= 0; i--) {
+                int val1int = (Integer) val1temp.getValue();
+                int val2int = (Integer) val2temp.getValue();
+                int total = val1int + val2int;
+
+                if (total > 9) {
+                    over = 1;
+                    total -= 10;
+                }
+                else {
+                    over = 0;
+                }
+
+                value1.getBigInteger().setValue(total);
+
+                val1temp.prev();
+                val2temp.prev();
+            }
+            if (over != 0) {
+                value1.getBigInteger().addFront(1);
+            }
+        }
+        else {
+            if (val1Length < val2Length) {
+                while(val1Length < val2Length) {
+                    value1.getBigInteger().addFront(0);
+                    val1Length++;
+                }
+            } else {
+                while(val1Length > val2Length) {
+                    value2.getBigInteger().addFront(0);
+                    val2Length++;
+                }
+            }
+        }
+        LList val1temp = value1.getBigInteger();
+        val1temp.moveToEnd();
+    
+        LList val2temp = value2.getBigInteger();
+        val2temp.moveToEnd();
+
+        for (int i = val1Length -1; i >= 0; i--) {
+            int val1int = (Integer) val1temp.getValue();
+            int val2int = (Integer) val2temp.getValue();
+            int total = val1int + val2int;
+
+            if (total > 9) {
+                over = 1;
+                total -= 10;
+            }
+            else {
+                over = 0;
+            }
+
+            value1.getBigInteger().setValue(total);
+
+            val1temp.prev();
+            val2temp.prev();
+        }
+        if (over != 0) {
+            value1.getBigInteger().addFront(1);
+        }
 
     }
 }
