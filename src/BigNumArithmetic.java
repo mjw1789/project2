@@ -3,8 +3,10 @@ import java.util.*;
 
 public class BigNumArithmetic {
     String [] equation;
-    LStack stack = new LStack();
-    public void main(String[] args) throws Exception {
+    static LStack stack = new LStack();
+    public static void main(String[] args) throws Exception {
+
+        BigNumArithmetic b = new BigNumArithmetic();
 
         String fileName = args[0];
 
@@ -13,10 +15,10 @@ public class BigNumArithmetic {
         Scanner fileReader = new Scanner(file);
         while (fileReader.hasNextLine()) {
             String line = fileReader.nextLine();
-            line = noExSpaces(line);
-            String[] equation = splitUp(line);
+            line = b.noExSpaces(line);
+            String[] equation = b.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
-                    if (equation[0].equals("+")) { this.add(equation); }
+                    if (equation[0].equals("+")) { b.add(equation); }
                     else if (!equation[0].equals("+") || !equation[0].equals("*")) {
                         String string = equation[0];
                         stack.push(string);
@@ -150,6 +152,5 @@ public class BigNumArithmetic {
         if (over != 0) {
             value1.getBigInteger().addFront(1);
         }
-
     }
 }
