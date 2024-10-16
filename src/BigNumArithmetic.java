@@ -95,7 +95,7 @@ public class BigNumArithmetic {
 
                 int val1int = (Integer) val1temp.getValue();
                 int val2int = (Integer) val2temp.getValue();
-                total = val1int + val2int;
+                int total = val1int + val2int + over;
 
                 if (total > 9) {
                     over = 1;
@@ -145,8 +145,6 @@ public class BigNumArithmetic {
         for (int i = val1Length -1; i >= 0; i--) {
             int val1int = (Integer) val1temp.getValue();
             int val2int = (Integer) val2temp.getValue();
-
-
             int total = val1int + val2int;
 
             if (total > 9) {
@@ -164,6 +162,86 @@ public class BigNumArithmetic {
         }
         if (over != 0) {
             value1.getBigInteger().addFront(1);
+        }
+    }
+
+    public void mult(String[] equation) {
+        Object temp1 = stack.pop();
+        Object temp2 = stack.pop();
+        String temp11 = temp1.toString();
+        String temp22 = temp2.toString();
+        int over = 0;
+        char space = ' ';
+        String statement = "";
+        int count = 0;
+
+        BigInteger value1 = new BigInteger();
+        BigInteger value2 = new BigInteger();
+
+        value1.bigInteger(temp11);
+        value2.bigInteger(temp22);
+
+        int val1Length = value1.bigIntegerSize();
+        int val2Length = value2.bigIntegerSize();
+
+        LList val1temp = value1.getBigInteger();
+        val1temp.moveToEnd();
+
+        LList val2temp = value2.getBigInteger();
+        val2temp.moveToEnd();
+
+        if (val1Length == val2Length || val1Length > val2Length) {
+            for (int i = val2Length - 1; i >= 0; i--){
+                String number = "";
+                int moveOver = 0;
+                int val2int = (Integer) val2temp.getValue();
+                for (int x = val1Length -1; x >= 0; x--) {
+                    int val1int = (Integer) val1temp.getValue();
+                    int total = (val1int * val2int) + over;
+                    String totaltemp = Integer.toString(total);
+                    for (int z = 0; z < moveOver; z++) {
+                        totaltemp = totaltemp + "0";
+                    }
+                    number = totaltemp + number;
+                    if(total > 9) {
+                        over = total - 10;
+                    }
+                    else {
+                        total = 0;
+                    }
+                }
+                statement = statement + " " + number;
+            }
+        } else {
+            for (int i = val1Length - 1; i >= 0; i--){
+                String number = "";
+                int moveOver = 0;
+                int val1int = (Integer) val1temp.getValue();
+                for (int x = val2Length -1; x >= 0; x--) {
+                    int val2int = (Integer) val2temp.getValue();
+                    int total = (val2int * val1int) + over;
+                    String totaltemp = Integer.toString(total);
+                    for (int z = 0; z < moveOver; z++) {
+                        totaltemp = totaltemp + "0";
+                    }
+                    number = totaltemp + number;
+                    if(total > 9) {
+                        over = total - 10;
+                    }
+                    else {
+                        total = 0;
+                    }
+                }
+                statement = statement + " " + number;
+            }
+        }
+        for (int t = 0; t < statement.length(); t++) {
+            if (statement.charAt(t) == space) {
+                count++;
+            }
+        }
+        for (int c = 0; c < count - 1; c++) {
+            statement = statement + " +";
         }
     }
 }
