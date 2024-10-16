@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.classfile.instruction.ThrowInstruction;
 import java.util.*;
 
 public class BigNumArithmetic {
@@ -92,7 +91,7 @@ public class BigNumArithmetic {
             for (int i = val1Length -1; i >= 0; i--) {
                 int val1int = (Integer) val1temp.getValue();
                 int val2int = (Integer) val2temp.getValue();
-                int total = val1int + val2int;
+                int total = val1int + val2int + over;
 
                 if (total > 9) {
                     over = 1;
@@ -133,7 +132,7 @@ public class BigNumArithmetic {
         for (int i = val1Length -1; i >= 0; i--) {
             int val1int = (Integer) val1temp.getValue();
             int val2int = (Integer) val2temp.getValue();
-            int total = val1int + val2int;
+            int total = val1int + val2int + over;
 
             if (total > 9) {
                 over = 1;
