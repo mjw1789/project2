@@ -95,7 +95,7 @@ public class BigNumArithmetic {
 
                 int val1int = (Integer) val1temp.getValue();
                 int val2int = (Integer) val2temp.getValue();
-                int total = val1int + val2int + over;
+                total = val1int + val2int + over;
 
                 if (total > 9) {
                     over = 1;
