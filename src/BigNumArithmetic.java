@@ -4,6 +4,8 @@ import java.util.*;
 public class BigNumArithmetic {
     String [] equation;
     static LStack stack = new LStack();
+    static LStack result = new LStack();
+    String resultString;
     public static void main(String[] args) throws Exception {
 
         BigNumArithmetic b = new BigNumArithmetic();
@@ -18,9 +20,9 @@ public class BigNumArithmetic {
             line = b.noExSpaces(line);
             String[] equation = b.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
-                    if (equation[0].equals("+")) { b.add(equation); }
-                    else if (!equation[0].equals("+") || !equation[0].equals("*")) {
-                        String string = equation[0];
+                    if (equation[i].equals("+")) { b.add(equation); }
+                    else if (!equation[i].equals("+") || !equation[i].equals("*")) {
+                        String string = equation[i];
                         stack.push(string);
                     }
                 }
@@ -75,25 +77,25 @@ public class BigNumArithmetic {
         BigInteger value1 = new BigInteger();
         BigInteger value2 = new BigInteger();
 
-        value1.bigInteger(temp11);
-        value2.bigInteger(temp22);
+        LList val1temp = value1.bigInteger(temp11);
+        LList val2temp = value2.bigInteger(temp22);
 
         int val1Length = value1.bigIntegerSize();
         int val2Length = value2.bigIntegerSize();
 
-
         if (val1Length == val2Length) {
+            int total;
 
-            LList val1temp = value1.getBigInteger();
             val1temp.moveToEnd();
     
-            LList val2temp = value2.getBigInteger();
             val2temp.moveToEnd();
 
+
             for (int i = val1Length -1; i >= 0; i--) {
+
                 int val1int = (Integer) val1temp.getValue();
                 int val2int = (Integer) val2temp.getValue();
-                int total = val1int + val2int;
+                total = val1int + val2int;
 
                 if (total > 9) {
                     over = 1;
@@ -105,35 +107,46 @@ public class BigNumArithmetic {
 
                 value1.getBigInteger().setValue(total);
 
+                String s = Integer.toString(total);
+                //System.out.println(s);
+                stack.push(s);
+
                 val1temp.prev();
                 val2temp.prev();
             }
+            
             if (over != 0) {
                 value1.getBigInteger().addFront(1);
             }
-        }
-        else {
-            if (val1Length < val2Length) {
-                while(val1Length < val2Length) {
-                    value1.getBigInteger().addFront(0);
-                    val1Length++;
-                }
-            } else {
-                while(val1Length > val2Length) {
-                    value2.getBigInteger().addFront(0);
-                    val2Length++;
-                }
+            while (!result.isEmpty()) {
+                Object e = result.pop();
+                String q = String.valueOf(e);
+                System.out.println(q);
+                resultString = resultString + q;
+                System.out.println(resultString);
             }
         }
-        LList val1temp = value1.getBigInteger();
+        else if (val1Length < val2Length) {
+            while(val1Length < val2Length) {
+                value1.getBigInteger().addFront(0);
+                val1Length++;
+                }
+        } else {
+            while(val1Length > val2Length) {
+                value2.getBigInteger().addFront(0);
+                val2Length++;
+                }
+            }
+
         val1temp.moveToEnd();
     
-        LList val2temp = value2.getBigInteger();
         val2temp.moveToEnd();
 
         for (int i = val1Length -1; i >= 0; i--) {
             int val1int = (Integer) val1temp.getValue();
             int val2int = (Integer) val2temp.getValue();
+
+
             int total = val1int + val2int;
 
             if (total > 9) {

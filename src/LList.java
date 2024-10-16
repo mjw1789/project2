@@ -60,7 +60,7 @@ class LList implements List {
   }
 
   public void moveToStart() { curr = head.next(); } // Set curr at list start
-  public void moveToEnd() { curr = tail; }          // Set curr at list end
+  public void moveToEnd() { curr = tail; prev();}          // Set curr at list end
 
   // Move curr one step left; no change if now at front
   public void prev() {

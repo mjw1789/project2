@@ -2,15 +2,17 @@ public class BigInteger {
     LList bigInteger;
     private int size;
   
-  public void bigInteger(String input) {
+  public LList bigInteger(String input) {
     LList list = new LList();
     int length = input.length();
     size = length;
     for (int i=0; i<length; i++) {
-      //list.addFront(input.charAt(i));
-      list.insert(input.charAt(i));
+      char c = input.charAt(i);
+      int val = Character.getNumericValue(c);
+      list.append(val);
     }
     this.setValue(list);
+    return list;
   }
 
   public void setValue(LList bigInteger){
@@ -23,6 +25,14 @@ public class BigInteger {
 
   public int bigIntegerSize() {
     return size;
+  }
+
+  public String bigIntegerString(LList input) {
+    String result = "";
+    for (int i=0; i<input.length(); i++) {
+      result = result + i;
+    }
+    return result;
   }
 
 }
