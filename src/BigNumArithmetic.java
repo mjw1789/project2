@@ -155,7 +155,6 @@ public class BigNumArithmetic {
             resultString = "";
                 Object e = result.pop();
                 String q = String.valueOf(e);
-                System.out.println("HELLO "+ e);
                 //resultString = resultString + q;
             
             if (resultString.contains("null")){
