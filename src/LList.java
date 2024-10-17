@@ -41,8 +41,9 @@ class LList implements List {
 
   //Add "it" to front
   public boolean addFront(Object it){
-    Link link = new Link(it, head);
-    head = link;
+    Link link = new Link(it, head.next());
+    head.setNext(link);
+    listSize++;
     return true;
   }
 
@@ -59,7 +60,7 @@ class LList implements List {
     return it;                              // Return value
   }
 
-  public void moveToStart() { curr = head.next(); } // Set curr at list start
+  public void moveToStart() { curr = head;} // Set curr at list start
   public void moveToEnd() { curr = tail; prev();}          // Set curr at list end
 
   // Move curr one step left; no change if now at front
@@ -75,7 +76,6 @@ class LList implements List {
   public void next() { if (curr != tail) curr = curr.next(); }
 
   public int length() { return listSize; } // Return list length
-
 
   // Return the position of the current element
   public int currPos() {

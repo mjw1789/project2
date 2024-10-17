@@ -29,8 +29,12 @@ public class BigInteger {
 
   public String bigIntegerString(LList input) {
     String result = "";
+    
+    input.moveToStart();
+    input.next();
     for (int i=0; i<input.length(); i++) {
-      result = result + i;
+      result = result + input.getValue();
+      input.next();
     }
     return result;
   }
