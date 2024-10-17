@@ -5,7 +5,10 @@ public class BigNumArithmetic {
     String [] equation;
     static LStack stack = new LStack();
     static LStack result = new LStack();
+    LList listResult = new LList();
+    LList l = new LList();
     String resultString;
+    String r;
     public static void main(String[] args) throws Exception {
 
         BigNumArithmetic b = new BigNumArithmetic();
@@ -35,6 +38,7 @@ public class BigNumArithmetic {
                     }
                 }
                 System.out.println(stack.pop());
+                result.clear();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Invalid File");
@@ -116,8 +120,6 @@ public class BigNumArithmetic {
                 int val2int = (Integer) val2temp.getValue();
                 total = val1int + val2int + over;
 
-                System.out.println(total);
-
                 if (total > 9) {
                     over = 1;
                     total -= 10;
@@ -130,28 +132,34 @@ public class BigNumArithmetic {
 
                 String s = Integer.toString(total);
 
-                if (over == 0){result.push(s);}
+                listResult.addFront(s);
+
+                //if (over == 0){result.push(s);}
 
 
                 val1temp.prev();
                 val2temp.prev();
             }
             if (over == 1) {
-                LList l = value1.getBigInteger();
+                l = value1.getBigInteger();
                 l.addFront(1);
                 String p = value1.bigIntegerString(l);
                 result.push(p);
+                System.out.println("P " + p);
             }
 
+            String k = value1.bigIntegerString(listResult);
+            result.push(k);
+            result.clear();
+            System.out.println("K "+k);
             resultString = "";
-            while (!result.isEmpty()){
                 Object e = result.pop();
                 String q = String.valueOf(e);
-                resultString = resultString + q;
-            }
+                System.out.println("HELLO "+ e);
+                //resultString = resultString + q;
+            
             if (resultString.contains("null")){
             resultString = resultString.substring(4);}
-            result.clear();
             stack.push(resultString);
         }
 
@@ -172,8 +180,6 @@ public class BigNumArithmetic {
 
         LList val1temp = value1.bigInteger(temp11);
         LList val2temp = value2.bigInteger(temp22);
-
-         System.out.println(value1.bigIntegerString(val2temp));
 
         String s = value1.bigIntegerString(val2temp);
 
