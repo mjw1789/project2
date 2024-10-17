@@ -21,11 +21,13 @@ public class BigNumArithmetic {
             String[] equation = b.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
                     if (equation[i].equals("+")) { b.add(equation); }
-                    else if (!equation[i].equals("+") || !equation[i].equals("*")) {
+                    else if (equation[i].equals("*")) { b.mult(equation); }
+                    else if (!equation[i].equals("+") || !equation[i].equals("*") || !equation[i].equals("^")) {
                         String string = equation[i];
                         stack.push(string);
                     }
                 }
+                System.out.println(stack.pop());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Invalid File");
@@ -108,8 +110,8 @@ public class BigNumArithmetic {
                 value1.getBigInteger().setValue(total);
 
                 String s = Integer.toString(total);
-                //System.out.println(s);
-                stack.push(s);
+                result.push(s);
+
 
                 val1temp.prev();
                 val2temp.prev();
@@ -118,18 +120,20 @@ public class BigNumArithmetic {
             if (over != 0) {
                 value1.getBigInteger().addFront(1);
             }
+
             while (!result.isEmpty()) {
                 Object e = result.pop();
                 String q = String.valueOf(e);
-                System.out.println(q);
                 resultString = resultString + q;
-                System.out.println(resultString);
             }
+            resultString = resultString.substring(4);
+            stack.push(resultString);
         }
+
         else if (val1Length < val2Length) {
             while(val1Length < val2Length) {
-                value1.getBigInteger().addFront(0);
                 val1Length++;
+                LList l = value1.getBigInteger();
                 }
         } else {
             while(val1Length > val2Length) {
@@ -178,19 +182,19 @@ public class BigNumArithmetic {
         BigInteger value1 = new BigInteger();
         BigInteger value2 = new BigInteger();
 
-        value1.bigInteger(temp11);
-        value2.bigInteger(temp22);
+        LList val1temp = value1.bigInteger(temp11);
+        LList val2temp = value2.bigInteger(temp22);
+
+        String s = value1.bigIntegerString(val2temp);
 
         int val1Length = value1.bigIntegerSize();
         int val2Length = value2.bigIntegerSize();
 
-        LList val1temp = value1.getBigInteger();
-        val1temp.moveToEnd();
-
-        LList val2temp = value2.getBigInteger();
-        val2temp.moveToEnd();
 
         if (val1Length == val2Length || val1Length > val2Length) {
+            val1temp.moveToEnd();
+            val2temp.moveToEnd();
+
             for (int i = val2Length - 1; i >= 0; i--){
                 String number = "";
                 int moveOver = 0;
