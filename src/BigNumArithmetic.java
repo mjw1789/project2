@@ -256,4 +256,29 @@ public class BigNumArithmetic {
                     }
                 }
     }
+
+    public void exp_by_squaring(String[] equation) {
+
+        Object temp1 = stack.pop();
+        Object temp2 = stack.pop();
+        String temp11 = temp1.toString();
+        String temp22 = temp2.toString();
+
+        int n = Integer.parseInt(temp11);
+        int x = Integer.parseInt(temp22);
+
+        int resultTemp = 0;
+
+        if (n < 0) {
+            resultTemp = ((1 / x)^-n); }
+        else if (n == 0){ resultTemp = 1;}
+        else if (n % 2 == 0) {
+            resultTemp = (x^2)^(n/2);}
+        else if (n % 2 != 0) {
+            resultTemp = (x*(x^2)^((n-1)/2));}
+
+        resultString = Integer.toString(resultTemp);
+        stack.push(resultString);
+    }
+
 }
