@@ -100,6 +100,8 @@ public class BigInteger {
   public void mult(String[] equation) {
     stack = main.getStack();
     int over = 0;
+    int count = 0;
+    String statment = "";
 
     //pop of 2 most recent items on the stack
     Object tempObject1 = stack.pop();
@@ -107,7 +109,6 @@ public class BigInteger {
 
     //turn those items into strings
     String tempString1 = tempObject1.toString();
-
     String tempString2 = tempObject2.toString();
     
     //input strings into bigInteger to turn them into linked lists
@@ -121,11 +122,79 @@ public class BigInteger {
     int list1Size = list1.length();
     int list2Size = list2.length();
 
+    list1.moveToEnd();
+    list2.moveToEnd();
+
     if (list1Size == list2Size || list1Size > list2Size) {
-      list1.moveToEnd();
-      list2.moveToEnd();
+
+      for (int i = list2Size - 1; i >= 0; i--){
+        String number = "";
+        int moveOver = 0;
+        int val2int = (Integer) list2.getValue();
+        for (int x = list1Size -1; x >= 0; x--) {
+            int val1int = (Integer) list1.getValue();
+            int total = (val1int * val2int) + over;
+            String totaltemp = Integer.toString(total);
+            number = number + totaltemp;
+
+            if (total < 9) {
+              over = 0;
+            }
+            while(total > 9) {
+                total /= 10;
+            }
+        }
+        for (int z = 0; z < moveOver; z++) {
+          number = number + "0";
+        }
+        moveOver++;
+        statment = statment + number;
+      }
     }
+    else {
+      for (int i = list1Size - 1; i >= 0; i--){
+        String number = "";
+        int moveOver = 0;
+        int val1int = (Integer) list1.getValue();
+        for (int x = list2Size -1; x >= 0; x--) {
+            int val2int = (Integer) list2.getValue();
+            int total = (val1int * val2int) + over;
+            String totaltemp = Integer.toString(total);
+            number = number + totaltemp;
+
+            if (total < 9) {
+              over = 0;
+            }
+            while(total > 9) {
+                total /= 10;
+            }
+        }
+        for (int z = 0; z < moveOver; z++) {
+          number = number + "0";
+        }
+        moveOver++;
+        count++;
+        statment = statment + number;
+      }
+    }
+    for (int c = 0; c < count -1; c++) {
+      statment = statment + " +";
+    }
+
+    /*BigNumArithmetic c = new BigNumArithmetic();
+
+                String[] adding = c.splitUp(statment);
+                for (int x=0; x<adding.length; x++) {
+                    if (adding[x].equals("+")) { c.add(adding); }
+                    else if (adding[x].equals("*")) { c.mult(adding); }
+                    else if (!adding[x].equals("+") || !adding[x].equals("*") || !adding[x].equals("^")) {
+                        String string = adding[x];
+                        string = zeros(string);
+                        stack.push(string);
+                    }
+                }*/
   }
+
 
   public String bigIntegerString(LList input) {
     String result = "";
