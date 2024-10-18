@@ -11,7 +11,7 @@ public class BigNumArithmetic {
 
         int numbers = 0;
         int operators = 0;
-
+    
         String fileName = args[0];
 
         try{
@@ -39,8 +39,8 @@ public class BigNumArithmetic {
 
                         LList result = bigInteger.add(list1, list2);
                         stack.push(bigInteger.bigIntegerString(result));}
-                    else if (equation[i].equals("*")) {
-                        operators++; 
+                    else if (equation[i].equals("*")) { 
+                        operators ++;
                         
                         //pop of 2 most recent items on the stack
                         Object tempObject1 = stack.pop();
@@ -72,7 +72,7 @@ public class BigNumArithmetic {
                         LList numList = bigInteger.bigInteger(numString);
 
                         //pass values to exp method
-                        //bigInteger.exp_by_squaring(numList, exponent);
+                        //bigInteger.exp_by_squaring(numList, exponent); 
                         }
                     else {
                         numbers++;
@@ -81,16 +81,15 @@ public class BigNumArithmetic {
                         stack.push(string);
                     }
                 }
-
-                System.out.println("NUM "+ numbers);
-                System.out.println("OP "+ operators);
-
-
-                //if there is one less opperator than numbers than it is corrent and if not that is the else statment
+                
                 if (numbers == operators + 1) {
                     System.out.println(line + " = " + stack.pop());
+                    numbers =0;
+                    operators =0;
                 } else {
                     System.out.println(line + " = ");
+                    numbers =0;
+                    operators =0;
                 }
             }
         } catch (FileNotFoundException e) {

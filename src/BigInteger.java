@@ -90,7 +90,7 @@ public class BigInteger {
     
     int over = 0;
     int count = 0;
-    int prod = 0;
+    long prod = 0;
     int totalProd = 0;
     int product = 0;
     String statment = "";
@@ -115,8 +115,8 @@ public class BigInteger {
       list2Size = list2.length();
     }
 
-    System.out.println(bigIntegerString(list2));
-    System.out.println(bigIntegerString(list1));
+    //System.out.println(bigIntegerString(list2));
+    //System.out.println(bigIntegerString(list1));
 
     list1.moveToEnd();
     list2.moveToEnd();
@@ -128,20 +128,14 @@ public class BigInteger {
 
           for (int x = list1Size - 1; x >= 0; x--){
             int val = (Integer) list1.getValue();
-            System.out.println("MAIN" + valmain);
-            System.out.println("STUFF" + val);
 
             prod = valmain * val * multiplier2 * multiplier1;
-            System.out.println("PROD " + prod);
             multiplier2 = multiplier2 * 10;
-            String s = Integer.toString(prod);
+            String s = Long.toString(prod);
             LList p = bigInteger(s);
             prodTOTAL = add(prodTOTAL, p);
-            //totalProd = totalProd + prod;
             list1.prev();
-            //System.out.println("TOTALPROD " + "PASS " + x + " " + totalProd);
           }
-          //System.out.println("PROD " + totalProd);
 
         multiplier1 = multiplier1 * 10;
         prod = 0;
@@ -149,12 +143,12 @@ public class BigInteger {
         list2.prev();
     }
   }
-    System.out.println("PRODUCT");
-    System.out.println(bigIntegerString(prodTOTAL));
+    //System.out.println("PRODUCT");
+    //System.out.println(bigIntegerString(prodTOTAL));
     return prodTOTAL;
 }
 
-  /*public LList exp_by_squaring(LList numList, int exponent) {
+  public LList exp_by_squaring(LList numList, int exponent) {
 
     int n = exponent;
     LList x = numList;
@@ -166,10 +160,10 @@ public class BigInteger {
     else if (n % 2 == 0) {resultTemp = exp_by_squaring(xx , n / 2);}
     else if (n % 2 != 0) {resultTemp = mult(x, sec);}
 
-    bigIntegerString(resultTemp);
+    resultString = bigIntegerString(resultTemp);
     stack.push(resultString);
     return resultTemp;
-}*/
+}
 
   public String bigIntegerString(LList input) {
     String result = "";
