@@ -21,14 +21,44 @@ public class BigNumArithmetic {
             String[] equation = bigNumArithemtic.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
                     if (equation[i].equals("+")) { bigInteger.add(); }
-                    else if (equation[i].equals("*")) { bigInteger.mult(equation); }
-                    else if (!equation[i].equals("+") || !equation[i].equals("*") || !equation[i].equals("^")) {
+                    else if (equation[i].equals("*")) { 
+                        
+                        //pop of 2 most recent items on the stack
+                        Object tempObject1 = stack.pop();
+                        Object tempObject2 = stack.pop();
+
+                        //turn those items into strings
+                        String tempString1 = tempObject1.toString();
+                        String tempString2 = tempObject2.toString();
+    
+                        //input strings into bigInteger to turn them into linked lists
+                        LList list1 = bigInteger.bigInteger(tempString1);
+                        LList list2 = bigInteger.bigInteger(tempString2);
+
+                        bigInteger.mult(list1, list2); }
+
+                    else if (equation[i].equals("^")) {
+
+                        //get expoenent
+                        Object tempExponent = stack.pop();
+                        String expString = tempExponent.toString();
+                        int exponent = Integer.parseInt(expString);
+
+                        //get num value
+                        Object num = stack.pop();
+                        String numString = num.toString();
+                        LList numList = bigInteger.bigInteger(numString);
+
+                        //pass values to exp method
+                        bigInteger.exp_by_squaring(numList, exponent); 
+                        }
+                    else {
                         String string = equation[i];
                         string = zeros(string);
                         stack.push(string);
                     }
                 }
-                System.out.println(stack.pop());
+                System.out.println(line + " = " + stack.pop());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Invalid File");

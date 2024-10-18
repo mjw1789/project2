@@ -4,6 +4,7 @@ public class BigInteger {
     private BigNumArithmetic main = new BigNumArithmetic();
     private LStack stack;
     private String resultString;
+    private int total;
   
   public LList bigInteger(String input) {
     LList list = new LList();
@@ -18,6 +19,7 @@ public class BigInteger {
   }
 
   public void add () {
+    LList result = new LList();
     stack = main.getStack();
     int over = 0;
 
@@ -55,7 +57,6 @@ public class BigInteger {
 
       //once the two lists are an equal length add them
       if (list1Size == list2Size) {
-        int total;
 
         list1.moveToEnd();
         list2.moveToEnd();
@@ -80,39 +81,33 @@ public class BigInteger {
               over = 0;
           }
 
-          resultString = total + resultString;
-          if (resultString.contains("null")){
-            resultString = resultString.substring(0, resultString.length() - 4);}
+          result.addFront(total);
 
+          /*resultString = total + resultString;
+          if (resultString.contains("null")){
+            resultString = resultString.substring(0, resultString.length() - 4);} */
+
+            //System.out.println("RESULT "+ resultString);
 
           list1.prev();
           list2.prev();
+
       }
     }       
-            stack.push(resultString);
-            resultString = "";
+            if (over == 1) {
+              result.addFront(1);
+            }
+            stack.push(this.bigIntegerString(result));
+            //resultString = "";
 
       //System.out.println(this.bigIntegerString(list1));
       //System.out.println(this.bigIntegerString(list2));
 
   }
 
-  public void mult(String[] equation) {
+  public LList mult(LList list1, LList list2) {
     stack = main.getStack();
     int over = 0;
-
-    //pop of 2 most recent items on the stack
-    Object tempObject1 = stack.pop();
-    Object tempObject2 = stack.pop();
-
-    //turn those items into strings
-    String tempString1 = tempObject1.toString();
-
-    String tempString2 = tempObject2.toString();
-    
-    //input strings into bigInteger to turn them into linked lists
-    LList list1 = this.bigInteger(tempString1);
-    LList list2 = this.bigInteger(tempString2);
 
     //System.out.println(this.bigIntegerString(list1));
     //System.out.println(this.bigIntegerString(list2));
@@ -126,6 +121,22 @@ public class BigInteger {
       list2.moveToEnd();
     }
   }
+
+  public void exp_by_squaring(LList numList, int exponent) {
+    stack = main.getStack();
+
+    int n = exponent;
+    LList x = numList;
+
+    LList resultTemp;
+
+
+    if (n == 0){ resultTemp = "1";}
+    /*else if (n % 2 == 0) {resultTemp = exp_by_squaring(mult(x,x), n / 2);}
+    else if (n % 2 != 0) {resultTemp = mult(x, exp_by_squaring(mult(x,x), (n - 1) / 2));}*/
+    resultString = Integer.toString(resultTemp);
+    stack.push(resultString);
+}
 
   public String bigIntegerString(LList input) {
     String result = "";
