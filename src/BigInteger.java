@@ -7,6 +7,7 @@ public class BigInteger {
     private String resultString;
     private int total;
     LList resultTemp;
+    LList prodTOTAL = new LList();
   
   public LList bigInteger(String input) {
     LList list = new LList();
@@ -87,7 +88,6 @@ public class BigInteger {
   public LList mult(LList list1, LList list2) {
     stack = main.getStack();
     
-    stack = main.getStack();
     int over = 0;
     int count = 0;
     int prod = 0;
@@ -120,35 +120,38 @@ public class BigInteger {
 
     list1.moveToEnd();
     list2.moveToEnd();
-
+    int multiplier1 = 1;
     if (list1Size == list2Size || list1Size > list2Size) {
       for (int i = list2Size - 1; i >= 0; i--){
         int valmain = (Integer) list2.getValue();
-        int multiplier = 1;
+        int multiplier2 = 1;
 
           for (int x = list1Size - 1; x >= 0; x--){
             int val = (Integer) list1.getValue();
-            prod = valmain * val * multiplier;
+            System.out.println("MAIN" + valmain);
+            System.out.println("STUFF" + val);
+
+            prod = valmain * val * multiplier2 * multiplier1;
             System.out.println("PROD " + prod);
-            multiplier = multiplier * 10;
+            multiplier2 = multiplier2 * 10;
+            String s = Integer.toString(prod);
+            LList p = bigInteger(s);
+            prodTOTAL = add(prodTOTAL, p);
+            //totalProd = totalProd + prod;
             list1.prev();
-            totalProd = totalProd + prod;
-            System.out.println("TOTALPROD " + totalProd);
-
-            //code here
-
+            //System.out.println("TOTALPROD " + "PASS " + x + " " + totalProd);
           }
-        product = product + totalProd;
-        System.out.println("RESULT "+ product);
+          //System.out.println("PROD " + totalProd);
+
+        multiplier1 = multiplier1 * 10;
         prod = 0;
         list1.moveToEnd();
         list2.prev();
-        //code here
     }
   }
-    String productString = Integer.toString(product);
-    LList productTotal = bigInteger(productString);
-    return productTotal;
+    System.out.println("PRODUCT");
+    System.out.println(bigIntegerString(prodTOTAL));
+    return prodTOTAL;
 }
 
   /*public LList exp_by_squaring(LList numList, int exponent) {
