@@ -242,5 +242,18 @@ public class BigNumArithmetic {
         for (int c = 0; c < count - 1; c++) {
             statement = statement + " +";
         }
+
+        BigNumArithmetic c = new BigNumArithmetic();
+
+                String[] adding = c.splitUp(statement);
+                for (int x=0; x<adding.length; x++) {
+                    if (adding[x].equals("+")) { c.add(adding); }
+                    else if (adding[x].equals("*")) { c.mult(adding); }
+                    else if (!adding[x].equals("+") || !adding[x].equals("*") || !adding[x].equals("^")) {
+                        String string = adding[x];
+                        string = zeros(string);
+                        stack.push(string);
+                    }
+                }
     }
 }
