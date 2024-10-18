@@ -3,6 +3,7 @@ public class BigInteger {
     private int size;
     private BigNumArithmetic main = new BigNumArithmetic();
     private LStack stack;
+    //private LStack result;
     private String resultString;
     private int total;
     LList resultTemp;
@@ -19,22 +20,10 @@ public class BigInteger {
     return list;
   }
 
-  public void add () {
+  public LList add (LList list1, LList list2) {
     LList result = new LList();
     stack = main.getStack();
     int over = 0;
-
-    //pop of 2 most recent items on the stack
-    Object tempObject1 = stack.pop();
-    Object tempObject2 = stack.pop();
-
-    //turn those items into strings
-    String tempString1 = tempObject1.toString();
-    String tempString2 = tempObject2.toString();
-    
-    //input strings into bigInteger to turn them into linked lists
-    LList list1 = this.bigInteger(tempString1);
-    LList list2 = this.bigInteger(tempString2);
 
     //System.out.println(this.bigIntegerString(list1));
     //System.out.println(this.bigIntegerString(list2));
@@ -84,12 +73,6 @@ public class BigInteger {
 
           result.addFront(total);
 
-          /*resultString = total + resultString;
-          if (resultString.contains("null")){
-            resultString = resultString.substring(0, resultString.length() - 4);} */
-
-            //System.out.println("RESULT "+ resultString);
-
           list1.prev();
           list2.prev();
 
@@ -98,22 +81,19 @@ public class BigInteger {
             if (over == 1) {
               result.addFront(1);
             }
-            stack.push(this.bigIntegerString(result));
-            //resultString = "";
-
-      //System.out.println(this.bigIntegerString(list1));
-      //System.out.println(this.bigIntegerString(list2));
-
+          return result;
   }
 
   public LList mult(LList list1, LList list2) {
     stack = main.getStack();
+    
+    stack = main.getStack();
     int over = 0;
     int count = 0;
+    int prod = 0;
+    int totalProd = 0;
+    int product = 0;
     String statment = "";
-
-    LList list11 = list1;
-    LList list22 = list2;
 
     //get size of lists
     int list1Size = list1.length();
@@ -135,80 +115,41 @@ public class BigInteger {
       list2Size = list2.length();
     }
 
+    System.out.println(bigIntegerString(list2));
+    System.out.println(bigIntegerString(list1));
+
+    list1.moveToEnd();
+    list2.moveToEnd();
+
     if (list1Size == list2Size || list1Size > list2Size) {
-
       for (int i = list2Size - 1; i >= 0; i--){
-        String number = "";
-        int moveOver = 0;
-        int val2int = (Integer) list2.getValue();
-        for (int x = list1Size -1; x >= 0; x--) {
-            int val1int = (Integer) list1.getValue();
-            int total = (val1int * val2int) + over;
-            String totaltemp = Integer.toString(total);
-            number = number + totaltemp;
-            System.out.println(number);
+        int valmain = (Integer) list2.getValue();
+        int multiplier = 1;
 
-            if (total < 9) {
-              over = 0;
-            }
-            while(total > 9) {
-                total /= 10;
-            }
-        }
-        for (int z = 0; z < moveOver; z++) {
-          number = number + "0";
-        }
-        moveOver++;
-        statment = statment + number;
-      }
+          for (int x = list1Size - 1; x >= 0; x--){
+            int val = (Integer) list1.getValue();
+            prod = valmain * val * multiplier;
+            System.out.println("PROD " + prod);
+            multiplier = multiplier * 10;
+            list1.prev();
+            totalProd = totalProd + prod;
+            System.out.println("TOTALPROD " + totalProd);
+
+            //code here
+
+          }
+        product = product + totalProd;
+        System.out.println("RESULT "+ product);
+        prod = 0;
+        list1.moveToEnd();
+        list2.prev();
+        //code here
     }
-    /*else {
-      for (int i = list1Size - 1; i >= 0; i--){
-        String number = "";
-        int moveOver = 0;
-        int val1int = (Integer) list1.getValue();
-        for (int x = list2Size -1; x >= 0; x--) {
-            int val2int = (Integer) list2.getValue();
-            int total = (val1int * val2int) + over;
-            String totaltemp = Integer.toString(total);
-            number = number + totaltemp;
-
-            if (total < 9) {
-              over = 0;
-            }
-            while(total > 9) {
-                total /= 10;
-            }
-        }
-        for (int z = 0; z < moveOver; z++) {
-          number = number + "0";
-        }
-        moveOver++;
-        count++;
-        statment = statment + number;
-      }
-    }*/
-    for (int c = 0; c < count -1; c++) {
-      statment = statment + " +";
-    }
-
-    System.out.println("ANSWER " + statment);
-
-    return list;
-
-    /*BigNumArithmetic c = new BigNumArithmetic();
-
-                String[] adding = c.splitUp(statment);
-                for (int x=0; x<adding.length; x++) {
-                    if (adding[x].equals("+")) { c.add(adding); }
-                    else if (adding[x].equals("*")) { c.mult(adding); }
-                    else if (!adding[x].equals("+") || !adding[x].equals("*") || !adding[x].equals("^")) {
-                        String string = adding[x];
-                        string = zeros(string);
-                        stack.push(string);
-                    }
-                }*/
   }
+    String productString = Integer.toString(product);
+    LList productTotal = bigInteger(productString);
+    return productTotal;
+}
 
   /*public LList exp_by_squaring(LList numList, int exponent) {
 

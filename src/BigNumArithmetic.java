@@ -20,7 +20,21 @@ public class BigNumArithmetic {
             line = bigNumArithemtic.noExSpaces(line);
             String[] equation = bigNumArithemtic.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
-                    if (equation[i].equals("+")) { bigInteger.add(); }
+                    if (equation[i].equals("+")) { 
+                        //pop of 2 most recent items on the stack
+                        Object tempObject1 = stack.pop();
+                        Object tempObject2 = stack.pop();
+
+                        //turn those items into strings
+                        String tempString1 = tempObject1.toString();
+                        String tempString2 = tempObject2.toString();
+    
+                        //input strings into bigInteger to turn them into linked lists
+                        LList list1 = bigInteger.bigInteger(tempString1);
+                        LList list2 = bigInteger.bigInteger(tempString2);
+
+                        LList result = bigInteger.add(list1, list2);
+                        stack.push(bigInteger.bigIntegerString(result));}
                     else if (equation[i].equals("*")) { 
                         
                         //pop of 2 most recent items on the stack
@@ -35,7 +49,9 @@ public class BigNumArithmetic {
                         LList list1 = bigInteger.bigInteger(tempString1);
                         LList list2 = bigInteger.bigInteger(tempString2);
 
-                        bigInteger.mult(list1, list2); }
+                        LList result = bigInteger.mult(list1, list2); 
+                        stack.push(bigInteger.bigIntegerString(result));
+                        }
 
                     else if (equation[i].equals("^")) {
 
