@@ -130,6 +130,9 @@ public class BigInteger {
 
       list1 = temp1;
       list2 = temp2;
+
+      list1Size = list1.length();
+      list2Size = list2.length();
     }
 
     if (list1Size == list2Size || list1Size > list2Size) {
@@ -143,6 +146,7 @@ public class BigInteger {
             int total = (val1int * val2int) + over;
             String totaltemp = Integer.toString(total);
             number = number + totaltemp;
+            System.out.println(number);
 
             if (total < 9) {
               over = 0;
@@ -187,6 +191,8 @@ public class BigInteger {
     for (int c = 0; c < count -1; c++) {
       statment = statment + " +";
     }
+
+    System.out.println("ANSWER " + statment);
 
     return list;
 
