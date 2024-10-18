@@ -50,7 +50,7 @@ public class BigNumArithmetic {
                         LList numList = bigInteger.bigInteger(numString);
 
                         //pass values to exp method
-                        bigInteger.exp_by_squaring(numList, exponent); 
+                        //bigInteger.exp_by_squaring(numList, exponent); 
                         }
                     else {
                         String string = equation[i];
