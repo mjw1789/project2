@@ -1,1 +1,14 @@
-Testing
+METHOD LOCATIONS:
+
+BigNumArithemtic:
+  - main (print statement and file reading location)
+  - noExSpaces (removes extra spaces in file)
+  - splitUp (splits the numbers and operators for each file line)
+  - zeros (gets rid of leading zeros)
+
+BigInteger:
+  - bigInteger (turns string argument into a linked list)
+  - add (used for addition operations)
+  - mult (used for multiplication operations)
+  - exp_by_squaring (used for exponenet operations)
+  - bigIntegerString (turns a linked list into a string by iterating through it)

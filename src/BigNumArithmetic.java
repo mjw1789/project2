@@ -88,7 +88,6 @@ public class BigNumArithmetic {
                         stack.push(string);
                     }
                 }
-                //System.out.println(operators + " " + numbers);
                 
                 //check if line is valid (if there are more numbers then operators it will print a blank as the answer)
                 if (numbers == operators + 1) {
@@ -105,10 +104,7 @@ public class BigNumArithmetic {
             System.out.println("Invalid File");
         }
     }
-    
 
-//getter method for stack
-    public LStack getStack() {return stack;}
 
 //this is removing all of the extra spaces from one line of input
     public String noExSpaces(String line) {

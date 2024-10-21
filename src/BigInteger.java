@@ -9,6 +9,15 @@ public class BigInteger {
     LList resultTemp;
     LList prodTOTAL = new LList();
   
+  
+  /*
+   * This function:
+   * 1) creates a new LList
+   * 2) gets the length of the provided input argument
+   * 3) loops through a for loop adding each digit of the String 
+   *    into the LList until the end of the String is reached
+   * 4) returns the LList
+   */
   public LList bigInteger(String input) {
     LList list = new LList();
     int length = input.length();
@@ -35,7 +44,6 @@ public class BigInteger {
 
   public LList add (LList list1, LList list2) {
     LList result = new LList();
-    stack = main.getStack();
     int over = 0;
 
     //get size of lists
@@ -94,8 +102,27 @@ public class BigInteger {
           return result;
   }
 
+  /*
+   * This function:
+   * 1) Takes in the list1 and list2 LList arguments
+   * 2) gets the size of both lists
+   * 3) switches list positions if list2Size is greater than list1Size
+   * 4) move both LLists to the end position
+   * 5) multiply by each individual digit
+   * 6) If there is a number that needs to be carried over set it to over
+   * 7) If there is no number to carry over then set over to 0
+   * 8) iterate through list1 until you reach the beginning of it
+   * 9) after exiting the for loop add zeros to the end of the LList based on the multiplier number
+   * 10) if the over is not set to 0 add the over number to the beginning of the list
+   * 11) add one to the multiplier
+   * 12) add prodTotal to the listMulti LList to get the total
+   * 13) clear listMulti
+   * 14) go to the previous link in list2 and go back to the end of list1
+   * 15) Loop through this process until there is nothing previous left in list2
+   * 16) push the prodTOTAL LList to the stack
+   */
+
   public LList mult(LList list1, LList list2) {
-    stack = main.getStack();
     prodTOTAL.clear();
     
     int over = 0;
@@ -174,31 +201,6 @@ public class BigInteger {
         over = 0;
     }
   }
-
-    /* 
-    int multiplier1 = 1;
-    if (list1Size == list2Size || list1Size > list2Size) {
-      for (int i = list2Size - 1; i >= 0; i--){
-        int valmain = (Integer) list2.getValue();
-        int multiplier2 = 1;
-
-          for (int x = list1Size - 1; x >= 0; x--){
-            int val = (Integer) list1.getValue();
-
-            prod = valmain * val * multiplier2 * multiplier1;
-            multiplier2 = multiplier2 * 10;
-            String s = Long.toString(prod);
-            LList p = bigInteger(s);
-            prodTOTAL = add(prodTOTAL, p);
-            list1.prev();
-          }
-
-        multiplier1 = multiplier1 * 10;
-        prod = 0;
-        list1.moveToEnd();
-        list2.prev();
-    }
-  }*/
     return prodTOTAL;
 }
 
@@ -219,6 +221,12 @@ public class BigInteger {
     return resultTemp;
 }
 
+  /*
+   * This function:
+   * 1) Iterates through each position of the LList provided in the argument
+   * 2) add each digit to the result String
+   * 3) return the result String
+   */
   public String bigIntegerString(LList input) {
     String result = "";
     
