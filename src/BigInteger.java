@@ -21,13 +21,22 @@ public class BigInteger {
     return list;
   }
 
+  /*
+   * This function:
+   * 1) gets the length of the two lists passed in as arguments
+   * 2) checks if the lengths are uneven and if they are, adds zeros to the front to make them even
+   * 3) continues with the add function once the two lists are an equal length
+   * 4) moves the linked list position to the end for both list1 and list2
+   * 5) iterates from beginning to end and adds values in the same position of both linked lists together
+   * 6) if the two values add up to more than 9 it carries a one over for the next values (carrying the one)
+   * 7) if there is a 1 that carries over at the end it is added to the fron using the add front method
+   * 8) returns the result of the addition to BigNumArithmetic to be printed
+   */
+
   public LList add (LList list1, LList list2) {
     LList result = new LList();
     stack = main.getStack();
     int over = 0;
-
-    //System.out.println(this.bigIntegerString(list1));
-    //System.out.println(this.bigIntegerString(list2));
 
     //get size of lists
     int list1Size = list1.length();
@@ -87,13 +96,15 @@ public class BigInteger {
 
   public LList mult(LList list1, LList list2) {
     stack = main.getStack();
+    prodTOTAL.clear();
     
     int over = 0;
-    int count = 0;
-    long prod = 0;
-    int totalProd = 0;
-    int product = 0;
+    int prod = 0;
+    int digit1 = 0;
+    int digit2 = 0;
+    int prodLength = 0;
     String statment = "";
+    LList listMulti = new LList();
 
     //get size of lists
     int list1Size = list1.length();
@@ -113,13 +124,58 @@ public class BigInteger {
 
       list1Size = list1.length();
       list2Size = list2.length();
-    }
 
-    //System.out.println(bigIntegerString(list2));
-    //System.out.println(bigIntegerString(list1));
+    }
 
     list1.moveToEnd();
     list2.moveToEnd();
+
+    int multiplier = 0;
+    if (list1Size == list2Size || list1Size > list2Size) {
+      for (int i = list2Size - 1; i >= 0; i--){
+        prodLength = 0;
+        int valmain = (Integer) list2.getValue();
+
+          for (int x = list1Size - 1; x >= 0; x--){
+            int val = (Integer) list1.getValue();
+            prod = valmain * val + over;
+
+            String prodString = String.valueOf(prod);
+            prodLength = String.valueOf(prod).length();
+            
+
+            if (prodLength > 1) {
+              String[] digits = prodString.split("");
+              digit1 = Integer.valueOf(digits[0]);
+              digit2 = Integer.valueOf(digits[1]);
+              over = digit1;
+              listMulti.addFront(digit2);
+            } else {
+              listMulti.addFront(prod);
+              over = 0;
+            }
+            list1.prev();
+          }
+
+        for (int w=0; w < multiplier; w++) {listMulti.append(0);}
+        
+        if (over != 0) {
+         
+          listMulti.addFront(over);}
+          
+        multiplier = multiplier + 1;
+        prod = 0;
+        
+        prodTOTAL = add(prodTOTAL, listMulti);
+        
+        listMulti.clear();
+        list2.prev();
+        list1.moveToEnd();
+        over = 0;
+    }
+  }
+
+    /* 
     int multiplier1 = 1;
     if (list1Size == list2Size || list1Size > list2Size) {
       for (int i = list2Size - 1; i >= 0; i--){
@@ -142,9 +198,7 @@ public class BigInteger {
         list1.moveToEnd();
         list2.prev();
     }
-  }
-    //System.out.println("PRODUCT");
-    //System.out.println(bigIntegerString(prodTOTAL));
+  }*/
     return prodTOTAL;
 }
 
