@@ -11,6 +11,7 @@ public class BigNumArithmetic {
 
         int numbers = 0;
         int operators = 0;
+        boolean uneven = false;
     
         String fileName = args[0];
 
@@ -22,7 +23,7 @@ public class BigNumArithmetic {
             line = bigNumArithemtic.noExSpaces(line);
             String[] equation = bigNumArithemtic.splitUp(line);
                 for (int i=0; i<equation.length; i++) {
-                    if (equation[i].equals("+")) { 
+                    if (equation[i].equals("+")) {
                         operators++;
 
                         //pop of 2 most recent items on the stack
@@ -39,7 +40,7 @@ public class BigNumArithmetic {
 
                         LList result = bigInteger.add(list1, list2);
                         stack.push(bigInteger.bigIntegerString(result));}
-                    else if (equation[i].equals("*")) { 
+                    else if (equation[i].equals("*")) {
                         operators ++;
                         
                         //pop of 2 most recent items on the stack
@@ -54,9 +55,9 @@ public class BigNumArithmetic {
                         LList list1 = bigInteger.bigInteger(tempString1);
                         LList list2 = bigInteger.bigInteger(tempString2);
 
-                        LList result = bigInteger.mult(list1, list2); 
+                        LList result = bigInteger.mult(list1, list2);
                         stack.push(bigInteger.bigIntegerString(result));
-                        }
+                    }
 
                     else if (equation[i].equals("^")) {
                         operators++;
@@ -72,15 +73,18 @@ public class BigNumArithmetic {
                         LList numList = bigInteger.bigInteger(numString);
 
                         //pass values to exp method
-                        //bigInteger.exp_by_squaring(numList, exponent); 
-                        }
+                        //bigInteger.exp_by_squaring(numList, exponent);
+                        
+                    }
                     else {
+                        
                         numbers++;
                         String string = equation[i];
                         string = zeros(string);
                         stack.push(string);
                     }
                 }
+                //System.out.println(operators + " " + numbers);
                 
                 if (numbers == operators + 1) {
                     System.out.println(line + " = " + stack.pop());
