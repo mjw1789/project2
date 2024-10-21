@@ -75,6 +75,10 @@ public class BigNumArithmetic {
                         //pass values to exp method
                         //bigInteger.exp_by_squaring(numList, exponent);
                         
+                    
+
+                        LList result = bigInteger.exp_by_squaring(numList, exponent);
+                        stack.push(bigInteger.bigIntegerString(result));
                     }
                     else {
                         
@@ -86,6 +90,7 @@ public class BigNumArithmetic {
                 }
                 //System.out.println(operators + " " + numbers);
                 
+                //check if line is valid (if there are more numbers then operators it will print a blank as the answer)
                 if (numbers == operators + 1) {
                     System.out.println(line + " = " + stack.pop());
                     numbers =0;
@@ -100,13 +105,18 @@ public class BigNumArithmetic {
             System.out.println("Invalid File");
         }
     }
+    
 
 //getter method for stack
     public LStack getStack() {return stack;}
 
-    //this is removing all of the extra spaces from one line of input
+//this is removing all of the extra spaces from one line of input
     public String noExSpaces(String line) {
         line = line.replaceAll("( )+", " ");
+        if (line.charAt(0) == ' ') {
+            line = line.replaceFirst("( )+", "");
+        }
+        
         return line;
     }
 
