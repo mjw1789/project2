@@ -56,8 +56,10 @@ public class BigNumArithmetic {
                         LList list2 = bigInteger.bigInteger(tempString2);
 
                         LList result = bigInteger.mult(list1, list2);
-                        stack.push(bigInteger.bigIntegerString(result));
-                    }
+                        String resultString = bigInteger.bigIntegerString(result);
+                        String temp = zeros(resultString);
+                        stack.push(temp);
+                        }
 
                     else if (equation[i].equals("^")) {
                         operators++;
@@ -73,7 +75,8 @@ public class BigNumArithmetic {
                         LList numList = bigInteger.bigInteger(numString);
 
                         //pass values to exp method
-                        //bigInteger.exp_by_squaring(numList, exponent);
+                        LList r = bigInteger.exp_by_squaring(numList, exponent);
+                        stack.push(bigInteger.bigIntegerString(r));
                         
                     
 
